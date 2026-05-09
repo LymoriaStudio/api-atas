@@ -11,6 +11,7 @@ public class AppDbContext : DbContext
     public DbSet<Departamento> Departamentos => Set<Departamento>();
     public DbSet<Pessoa> Pessoas => Set<Pessoa>();
     public DbSet<AtaParticipante> AtaParticipantes => Set<AtaParticipante>();
+    public DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -8,7 +8,7 @@ using apiatas.Models;
 using apiatas.DTO.Ata;
 using apiatas.DTO.Departamento;
 using apiatas.DTO.Pessoa;
-
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -79,6 +79,7 @@ public class AtaController : ControllerBase
         return Ok(response);
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<AtaResponseDto>> Create(AtaRequestDto dto)
     {
@@ -96,7 +97,7 @@ public class AtaController : ControllerBase
         {
             Titulo = dto.Titulo,
             Tipo = dto.Tipo,
-            DataCriacao = dto.DataCriacao,
+            DataCriacao = DateTime.UtcNow,
             Status = dto.Status,
             ArquivoUrl = dto.ArquivoUrl,
             NumeroAta = dto.NumeroAta,
@@ -125,6 +126,7 @@ public class AtaController : ControllerBase
         });
     }
 
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, AtaRequestDto dto)
     {
@@ -140,7 +142,7 @@ public class AtaController : ControllerBase
 
         ata.Titulo = dto.Titulo;
         ata.Tipo = dto.Tipo;
-        ata.DataCriacao = dto.DataCriacao;
+        ata.DataCriacao = DateTime.UtcNow;
         ata.Status = dto.Status;
         ata.ArquivoUrl = dto.ArquivoUrl;
         ata.NumeroAta = dto.NumeroAta;
@@ -154,6 +156,7 @@ public class AtaController : ControllerBase
         return NoContent();
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
